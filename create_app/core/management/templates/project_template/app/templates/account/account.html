@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="content-section">
+        <div class="media">
+            <img class="rounded-circle account-img" src="{{ profile_image }}">
+            <div class="media-body">
+                <h2 class="account-heading">{{ user.username }}</h2>
+                <p class="text-secondary">{{ user.email }}</p>
+                <a class="btn btn-outline-info" href="{{ url_for('auth.profile_edit')}}">Edit Profile</a>
+            </div>
+        </div>
+    <!-- Profile detail here -->
+    </div>
+{% endblock content %}
