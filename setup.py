@@ -7,6 +7,7 @@ setup(
     include_package_data=True,
     install_requires=[
         'Click',
+        'Jinja2',
     ],
     entry_points='''
         [console_scripts]

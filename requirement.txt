@@ -1,0 +1,4 @@
+Click==7.0
+create-app==0.1
+Jinja2==2.10.1
+MarkupSafe==1.1.1
