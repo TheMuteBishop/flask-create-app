@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='create_app',
+    name='Flask-create-app',
     version='0.1',
     packages=find_packages(),
     include_package_data=True,
@@ -11,6 +11,6 @@ setup(
     ],
     entry_points='''
         [console_scripts]
-        create_app=create_app.app:cli
+        flask-create-app=flask_create_app.app:cli
     ''',
 )

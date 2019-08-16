@@ -1,9 +1,9 @@
-from create_app.core.management import get_temp_dir
+from flask_create_app.core.management import get_temp_dir
 from jinja2 import Template
 import os
 import shutil
 import click
-from create_app.core.management.utils import generate_secret_key
+from flask_create_app.core.management.utils import generate_secret_key
 class NewProject(object):
 
     def __init__(self, project_name, usermodel, base_dir):
@@ -41,6 +41,8 @@ class NewProject(object):
                         new_file = os.path.join(new_path, file_name)
                         self.create_directory(new_path)
                         shutil.copy(old_file, new_file)
+                    elif not self.usermodel and 'account' in root:
+                        pass
                     else:
                         self.create_directory(new_path)
                         if file_extension == '.py-tpl':
@@ -48,6 +50,7 @@ class NewProject(object):
                         else:
                             new_file = os.path.join(new_path, filename + file_extension)
                         self.template_parser(old_file, new_file)
+                        
     def create_directory(self,dir_name):
         os.makedirs(dir_name, exist_ok=True)
 
