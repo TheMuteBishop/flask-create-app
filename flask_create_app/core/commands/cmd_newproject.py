@@ -1,9 +1,10 @@
-from flask_create_app.core.management import get_temp_dir
 from jinja2 import Template
+from jinja2 import Environment, FileSystemLoader
 import os
 import shutil
 import click
-from flask_create_app.core.management.utils import generate_secret_key
+from flask_create_app.core.management.utils import generate_secret_key, \
+    create_directory, get_temp_dir
 class NewProject(object):
 
     def __init__(self, project_name, usermodel, base_dir):
@@ -18,11 +19,11 @@ class NewProject(object):
             "db_uri": None
             }
 
-    def template_parser(self,old_file, new_file):
-        click.echo(f'writinh {old_file} .... \n')
-        with open(old_file, 'r') as f:
-            template = Template(f.read())
-            content = template.render(**self.context)
+    def template_parser(self,temp_path, temp_file, new_file):
+        loader = FileSystemLoader(temp_path)
+        env = Environment(loader=loader)
+        temp = env.get_template(temp_file)
+        content = temp.render(**self.context)
         with open(new_file, 'w', encoding='utf-8') as f:
             f.write(content)
 
@@ -33,26 +34,25 @@ class NewProject(object):
         for root, dirs,files in os.walk(template_dir):
             for file_name in files:
                 filename, file_extension = os.path.splitext(file_name)
-                if file_extension in ['.html', '.py', '.py-tpl', '.css']:
+                if file_extension in ['.html-tpl', '.py', '.py-tpl', '.css', '.txt']:
                     rel_dir = root[temp_dir_len:]
                     new_path = os.path.join(top_dir, self.project_name, rel_dir)
-                    old_file = os.path.join(root, file_name)
-                    if file_extension in ['.html', '.css']:
-                        new_file = os.path.join(new_path, file_name)
-                        self.create_directory(new_path)
-                        shutil.copy(old_file, new_file)
-                    elif not self.usermodel and 'account' in root:
-                        pass
+                    old_path, old_file = os.path.split(os.path.join(root, file_name))
+                    if file_extension in ['.html-tpl',]:
+                        if not self.usermodel and 'account' in root:
+                            pass
+                        else :    
+                            new_file = os.path.join(new_path, filename + '.html')
+                            create_directory(new_path)
+                            self.template_parser(old_path,old_file, new_file)
+                            # shutil.copy(old_file, new_file)
                     else:
-                        self.create_directory(new_path)
+                        create_directory(new_path)
                         if file_extension == '.py-tpl':
                             new_file = os.path.join(new_path, filename + '.py')
                         else:
                             new_file = os.path.join(new_path, filename + file_extension)
-                        self.template_parser(old_file, new_file)
-                        
-    def create_directory(self,dir_name):
-        os.makedirs(dir_name, exist_ok=True)
+                        self.template_parser(old_path,old_file, new_file)
 
 def print_to_consol(msg):
     click.echo(msg)

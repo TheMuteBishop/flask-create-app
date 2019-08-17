@@ -23,3 +23,5 @@ htmlcov/
 *,cover
 __pycache__
 flask_app/db.sqlite3
+clienv
+test.py

@@ -6,10 +6,10 @@ import os
 def cli():
     pass
 
-@cli.command()
+@cli.command('startproject')
 @click.argument('name', nargs=-1)
 @click.option('--user', '-um', help='Initialize with user model', is_flag=True, default=False)
-def new(name, user):
+def new_project(name, user):
     ''' create a flask project and starting template with usermodel
 
     '''
@@ -25,5 +25,15 @@ def new(name, user):
     create_project(project_name, user, base_dir)
     click.echo(f' {project_name} , {user} ')
 
+@cli.command('startapp')
+@click.argument('project_name')
+@click.argument('app_name')
+def new_app(project_name,app_name ):
+    """create new app in existing project
+    """
+    from flask_create_app.core.commands.cmd_newapp import create_new_app
+    proj_dir = os.getcwd()
+    create_new_app(app_name, proj_dir,project_name)
+    
 if __name__ == "__main__":
     cli()

@@ -1,0 +1,35 @@
+{% raw %}{% extends "base.html" %}{% endraw%}
+
+
+{% raw %}{% block content %}{% endraw%}
+<div class="container">
+    <div  style="text-align: center;">
+        <h3>Flask Project</h3>
+    </div>
+    <div style="text-align: left;">
+        <h5>Project has following directory structure</h5>
+        <ul>
+            <li>app</li>
+            <ul>
+                <li>commands</li>
+                <li>models <p class="text-muted">all detabase models</p></li>
+                <li>static
+                    <p  class="text-muted">style, javascript content</p>
+                </li>
+                <li>templates
+                    <p  class="text-muted">html content</p>
+                </li>
+                <li>views
+                    <p  class="text-muted">view layer</p>
+                </li>
+
+            </ul>
+            <li>tests</li>
+        </ul>
+    </div>
+    <div>
+        <p>This is starter template</p>
+        <p>Please edit local_settings as per your requirement</p>
+    </div>
+</div>
+{% raw %}{% endblock content %}{% endraw%}

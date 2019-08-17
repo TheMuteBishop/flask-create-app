@@ -2,10 +2,8 @@ from datetime import datetime
 import os
 
 from flask import Flask
-from flask_script import Manager
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail
-from flask_migrate import Migrate, MigrateCommand
 from flask_user import UserManager
 from flask_wtf.csrf import CSRFProtect
 from flask_bcrypt import Bcrypt
@@ -14,7 +12,6 @@ from flask_bcrypt import Bcrypt
 csrf_protect = CSRFProtect()
 db = SQLAlchemy()
 mail = Mail()
-migrate = Migrate()
 bcrypt = Bcrypt()
 
 # Initialize Flask Application
@@ -34,11 +31,9 @@ def create_app(extra_config_settings={}):
     # Setup Flask-SQLAlchemy
     db.init_app(app)
 
-    # Setup Flask-Migrate
-    migrate.init_app(app, db)
-
     # Setup Flask-Mail
     mail.init_app(app)
+
     # Setup flask_bcrypt
     bcrypt.init_app(app)
     # Setup WTForms CSRFProtect
@@ -56,8 +51,8 @@ def create_app(extra_config_settings={}):
 
     app.jinja_env.globals['bootstrap_is_hidden_field'] = is_hidden_field_filter
 
-    # Setup an error-logger to send emails to app.config.ADMINS
     {% if user %}
+    # Setup an error-logger to send emails to app.config.ADMINS
     init_email_error_handler(app)
     # Setup Flask-User to handle user account related forms
     from .models.user_model import User

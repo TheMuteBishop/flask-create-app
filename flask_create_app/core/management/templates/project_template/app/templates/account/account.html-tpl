@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% raw %}{% extends "base.html" %}
 {% block content %}
     <div class="content-section">
         <div class="media">
@@ -11,4 +11,4 @@
         </div>
     <!-- Profile detail here -->
     </div>
-{% endblock content %}
+{% endblock content %} {% endraw %}
