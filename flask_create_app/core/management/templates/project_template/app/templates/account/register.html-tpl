@@ -1,3 +1,4 @@
+{% raw %}
 {% extends "base.html" %}
 
 {% block content %}
@@ -71,3 +72,4 @@
         </small>
     </div>
 {% endblock content %}
+{% endraw %}

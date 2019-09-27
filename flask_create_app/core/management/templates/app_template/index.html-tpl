@@ -1,0 +1,8 @@
+{% raw %}
+{% extends "base.html" %}
+{% endraw%}
+
+
+{% raw %}{% block content %}{% endraw%}
+    <h5> {{ app_name }} works !! </h5>
+{% raw %}{% endblock %}{% endraw%}

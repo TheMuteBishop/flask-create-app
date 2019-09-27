@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
        <!-- Bootstrap CSS -->
        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-       <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+       {% raw %}<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">{% endraw%}
        <title>Flask App</title>
 </head>
 <body>
@@ -20,19 +20,18 @@
                 <div class="collapse navbar-collapse" id="navbarToggle">
                     <div class="navbar-nav mr-auto">
                     <a class="nav-item nav-link" href="/">Home</a>
-                    <a class="nav-item nav-link" href="/about">About</a>
                     </div>
                     <!-- Navbar Right Side -->
                     <div class="navbar-nav">
                         <a class="nav-item nav-link" href="#">Logout</a>
-                            <a class="nav-item nav-link" href="#">Login</a>
-                            <a class="nav-item nav-link" href="#">Register</a>
+                        <a class="nav-item nav-link" href="#">Login</a>
+                        <a class="nav-item nav-link" href="#">Register</a>
                     </div>
                 </div>
             </div>
         </nav>
     </header>
-    {% block content %}{% endblock content %}
+    {% raw %}{% block content %}{% endblock content %}{% endraw%}
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
